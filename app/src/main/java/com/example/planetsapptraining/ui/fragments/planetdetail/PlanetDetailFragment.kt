@@ -1,5 +1,8 @@
 package com.example.planetsapptraining.ui.fragments.planetdetail
 
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.planetsapptraining.*
 import kotlinx.android.synthetic.main.fragment_planet_detail.*
+import kotlinx.android.synthetic.main.item_image_text_view.view.*
 import javax.inject.Inject
 
 class PlanetDetailFragment : Fragment() {
@@ -43,5 +47,11 @@ class PlanetDetailFragment : Fragment() {
         view_detail_row_surface_gravity.render("Surface gravity", viewState.surfaceGravity.toString())
         view_detail_row_planet_type.render("Planet type", viewState.planetType.toString())
         view_detail_row_description.render("Description", viewState.description.toString())
+        ObjectAnimator.ofFloat(textPlanetName,"scaleX",0.8f,1.2f).start()
+        ObjectAnimator.ofFloat(textPlanetName,"scaleY",0.8f,1.2f).start()
+        (AnimatorInflater.loadAnimator(requireContext(), R.animator.planet_animator) as AnimatorSet).apply {
+            setTarget(imagePlanet)
+            start()
+        }
     }
 }
